@@ -6,9 +6,13 @@ import StreamList from "./streams/StreamList";
 import StreamShow from "./streams/StreamShow";
 import Header from "./Header";
 
+<<<<<<< HEAD
 
 function App() {
 
+=======
+function App() {
+>>>>>>> f580db65bada429964e0226c05dba5300e8db2eb
   return (
     <div className="App">
       <Header />

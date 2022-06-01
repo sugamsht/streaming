@@ -1,6 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+<<<<<<< HEAD
 import GoogleAuth from './GoogleAuth';
+=======
+>>>>>>> f580db65bada429964e0226c05dba5300e8db2eb
 
 function Header(props) {
     return (
@@ -22,8 +25,13 @@ function Header(props) {
                     </div>
 
                     <div className="hidden md:flex items-center space-x-3 ">
+<<<<<<< HEAD
                         {/* <Link to="" className="p-4 font-medium text-white bg-green-500 rounded hover:bg-green-400 transition duration-300">Sign Up</Link> */}
                         <GoogleAuth />
+=======
+                        {/* <Link to="" className="py-2 px-2 font-medium text-gray-500 rounded hover:bg-green-500 hover:text-white transition duration-300">Log In</Link> */}
+                        <Link to="" className="p-4 font-medium text-white bg-green-500 rounded hover:bg-green-400 transition duration-300">Sign Up</Link>
+>>>>>>> f580db65bada429964e0226c05dba5300e8db2eb
                     </div>
 
                     <div className="md:hidden flex items-center">
@@ -35,9 +43,15 @@ function Header(props) {
                             <svg className=" w-6 h-6 text-gray-500 hover:text-green-500 "
                                 x-show="!showMenu"
                                 fill="none"
+<<<<<<< HEAD
                                 strokeLinecap="round"
                                 strokeLinejoin="round"
                                 strokeWidth="2"
+=======
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+>>>>>>> f580db65bada429964e0226c05dba5300e8db2eb
                                 viewBox="0 0 24 24"
                                 stroke="currentColor"
                             >
