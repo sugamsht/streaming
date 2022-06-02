@@ -45,7 +45,7 @@ function GoogleAuth(props) {
 
     const onAuthChange = (isSignedIn) => {
         if (isSignedIn) {
-            props.signIn();
+            props.signIn(gapi.auth2.getAuthInstance().currentUser.get().getId());
         } else {
             props.signOut();
         }
