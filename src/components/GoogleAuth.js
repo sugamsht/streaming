@@ -32,6 +32,7 @@ function GoogleAuth(props) {
                 onAuthChange(gapi.auth2.getAuthInstance().isSignedIn.get());
             });
         });
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     // const onSuccess = (response) => {
