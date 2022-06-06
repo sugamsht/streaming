@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 import { GoogleLogin, GoogleLogout } from 'react-google-login';
 import { gapi } from "gapi-script";
 import { connect } from 'react-redux';
-import { signIn, signOut } from '../actions.js';
+import { signIn, signOut } from '../actions';
 
 
 const clientId = '530472740736-sire28ml6i0vkbn9bnrk9vf9pvj4dr89.apps.googleusercontent.com';
