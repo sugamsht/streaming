@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import GoogleAuth from './GoogleAuth';
+import { connect } from 'react-redux';
 
 function Header(props) {
     return (
@@ -17,7 +18,14 @@ function Header(props) {
 
                     <div className="hidden md:flex items-center space-x-1">
                         <Link to="/" className="py-4 px-2 text-gray-500 font-semibold hover:text-green-500 transition duration-300">Browse</Link>
-                        <Link to="/streams/new" className="py-4 px-2 text-gray-500 font-semibold hover:text-green-500 transition duration-300">Create Stream</Link>
+                        {props.isSignedIn ?
+                            <Link to="/streams/new" className="py-4 px-2 text-gray-500 font-semibold hover:text-green-500 transition duration-300">Create Stream</Link> :
+                            <button
+                                className="py-4 px-2 text-gray-500 font-semibold hover:text-green-500 transition duration-300"
+                                onClick={() => alert('Please sign in to create a stream')}
+                            >Create Stream</button>
+                        }
+                        {/* <Link to="/streams/new" className="py-4 px-2 text-gray-500 font-semibold hover:text-green-500 transition duration-300">Create Stream</Link> */}
                         <Link to="/" className="py-4 px-2 text-gray-500 font-semibold hover:text-green-500 transition duration-300">Contact Us</Link>
                     </div>
 
@@ -58,4 +66,10 @@ function Header(props) {
     );
 }
 
-export default Header;
+const mapStateToProps = (state) => {
+    return {
+        isSignedIn: state.auth.isSignedIn
+    }
+}
+
+export default connect(mapStateToProps)(Header);

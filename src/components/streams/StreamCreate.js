@@ -2,8 +2,11 @@ import React from 'react'
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form'
 import { createStream } from '../../actions'
+import { useNavigate } from 'react-router-dom';
 
 function StreamCreate(props) {
+
+    const history = useNavigate();
 
     function renderError({ error, touched }) {
         if (touched && error) {
@@ -28,14 +31,15 @@ function StreamCreate(props) {
 
     function onSubmit(formValues) {
         props.createStream(formValues);
+        history('/');
         // console.log(formValues);
     }
 
     // console.log(props);
     return (
         <form onSubmit={props.handleSubmit(onSubmit)} className=" max-w-2xl mx-[10vw] my-5" >
-            <Field name="title" component={renderInput} label="Enter Title" />
-            <Field name="description" component={renderInput} label="Enter Description" />
+            <Field name="title" component={renderInput} type="text" label="Enter Title" />
+            <Field name="description" component={renderInput} type="text" label="Enter Description" />
             <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 my-2 rounded">Submit</button>
         </form>
     )
