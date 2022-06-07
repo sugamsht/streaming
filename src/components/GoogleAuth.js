@@ -25,11 +25,12 @@ function GoogleAuth(props) {
     useEffect(() => {
         gapi.load('client:auth2', () => {
             gapi.client.init({
-                clientId: '530472740736-sire28ml6i0vkbn9bnrk9vf9pvj4dr89.apps.googleusercontent.com',
+                clientId: clientId,
                 scope: 'email'
             }).then(() => {
-                // setIsSignedIn(window.gapi.auth2.getAuthInstance().isSignedIn.get());
-                onAuthChange(gapi.auth2.getAuthInstance().isSignedIn.get());
+                const auth = gapi.auth2.getAuthInstance();
+                onAuthChange(auth.isSignedIn.get());
+                auth.isSignedIn.listen(onAuthChange); // listen for changes in the auth status
             });
         });
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -58,19 +59,16 @@ function GoogleAuth(props) {
             return null;
         } else if (props.isSignedIn) {
             return <GoogleLogout
-                clientId={clientId}
                 buttonText="Logout"
                 onLogoutSuccess={() => props.signOut()}
                 onFailure={() => console.log("Logout Failed")}
             />
         } else {
             return <GoogleLogin
-                clientId={clientId}
                 buttonText="Login"
                 onSuccess={() => props.signIn()}
                 // onFailure={onFailure}
                 cookiePolicy={'single_host_origin'}
-                isSignedIn={true}
             />
         }
     }
