@@ -1,12 +1,14 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux';
 import { fetchStreams } from '../../actions';
+import { Link } from 'react-router-dom';
 
 const StreamList = (props) => {
 
     useEffect(() => {
         props.fetchStreams();
     }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
         , [])
 
     const renderAdmin = (stream) => {
@@ -14,8 +16,8 @@ const StreamList = (props) => {
         if (stream.userId === props.currentUserId) {
             return (
                 <div className="flex gap-2">
-                    <button className="btn-primary ">Edit</button>
-                    <button className="btn-secondary">Delete</button>
+                    <Link className="btn-primary" to={`/streams/edit/${stream.id}`}>Edit</Link>
+                    <Link className="btn-secondary" to={`/streams/delete/${stream.id}`}>Delete</Link>
                 </div>
             );
         }
