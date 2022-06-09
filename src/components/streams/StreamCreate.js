@@ -2,11 +2,12 @@ import React from 'react'
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form'
 import { createStream } from '../../actions'
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
+import history from '../../history'
 
 function StreamCreate(props) {
 
-    const history = useNavigate();
+    // const history = useNavigate();
 
     function renderError({ error, touched }) {
         if (touched && error) {
@@ -31,7 +32,7 @@ function StreamCreate(props) {
 
     function onSubmit(formValues) {
         props.createStream(formValues);
-        history('/');
+        history.push('/');
         // console.log(formValues);
     }
 

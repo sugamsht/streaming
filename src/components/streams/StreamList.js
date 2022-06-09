@@ -12,7 +12,7 @@ const StreamList = (props) => {
         , [])
 
     const renderAdmin = (stream) => {
-        console.log("yo list ko id", stream.userId);
+        // console.log("yo list ko id", stream.userId);
         if (stream.userId === props.currentUserId) {
             return (
                 <div className="flex gap-2">

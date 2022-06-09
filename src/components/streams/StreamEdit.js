@@ -1,33 +1,26 @@
-import React, { useEffect } from 'react'
-import { useParams } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
 import { fetchStream } from '../../actions';
-import { useSelector } from "react-redux";
-import { connect } from 'react-redux'
 
-function StreamEdit(props) {
-    const { id } = useParams();
+const StreamEdit = (props) => {
 
     useEffect(() => {
-        props.fetchStream(id);
-    }, []);
+        props.fetchStream(props.match.params.id);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [props.match.params.id])
 
-    // const hshs = props.fetchStream(id);
-    console.log("mampakha", props);
-    // useSelector(state => console.log(state.streams[id]));
-    return (
-        <div>
-            <h1>Stream Edit</h1>
-        </div>
-    )
+    if (!props.stream) {
+        return <div>Loading...</div>;
+    }
+    return <div>{props.stream.title}</div>;
 }
 
-// const mapStateToProps = (state, ownProps) => {
-//     // console.log("asdasdwtf", state.streams[ownProps.match.params.id]);
-//     return {
-//         stream: state.streams
-//     }
-// }
+const mapStateToProps = (state, ownProps) => {
+    return { stream: state.streams[ownProps.match.params.id] };
+};
 
-
-export default connect(null, { fetchStream })(StreamEdit);
+export default connect(
+    mapStateToProps,
+    { fetchStream }
+)(StreamEdit);
 
