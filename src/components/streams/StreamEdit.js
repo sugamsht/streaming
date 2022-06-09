@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { fetchStream } from '../../actions';
+import { fetchStream, editStream } from '../../actions';
+import StreamForm from './StreamForm';
 
 const StreamEdit = (props) => {
 
@@ -9,10 +10,18 @@ const StreamEdit = (props) => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [props.match.params.id])
 
+    function onSubmit(formValues) {
+        props.editStream(props.match.params.id, formValues);
+    }
+
     if (!props.stream) {
         return <div>Loading...</div>;
     }
-    return <div>{props.stream.title}</div>;
+    return (<div>
+        <StreamForm initialValues={props.stream}
+            onSubmit={onSubmit}
+            title="Edit Stream" />
+    </div>)
 }
 
 const mapStateToProps = (state, ownProps) => {
@@ -21,6 +30,6 @@ const mapStateToProps = (state, ownProps) => {
 
 export default connect(
     mapStateToProps,
-    { fetchStream }
+    { fetchStream, editStream }
 )(StreamEdit);
 

@@ -13,8 +13,7 @@ function StreamCreate(props) {
 
     return (
         <div className='flex flex-col'>
-            <h1 className='flex text-2xl justify-center max-w-2xl mx-[10vw] my-5'>Create a Stream</h1>
-            <StreamForm onSubmit={onSubmit} />
+            <StreamForm onSubmit={onSubmit} title="Create a Stream" />
         </div>
     )
 }

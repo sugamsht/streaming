@@ -33,6 +33,7 @@ const StreamForm = (props) => {
             onSubmit={props.handleSubmit(onSubmit)}
             className="max-w-2xl mx-[10vw] my-5"
         >
+            <h1 className='flex text-2xl justify-center max-w-2xl mx-[10vw] my-5'>{props.title}</h1>
             <Field name="title" component={renderInput} label="Enter Title" />
             <Field
                 name="description"
