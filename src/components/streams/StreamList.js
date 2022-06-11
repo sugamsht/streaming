@@ -29,7 +29,8 @@ const StreamList = (props) => {
                 <div className="border-b border-gray-400 p-2" key={stream.id}>
                     <div className="flex">
                         <div className="flex-1">
-                            <h3 className="font-bold">{stream.title}</h3>
+                            <Link to={`/streams/${stream.id}`} className="font-bold" >{stream.title}</Link>
+                            {/* <h3 className="font-bold">{stream.title}</h3> */}
                             <p>{stream.description}</p>
                         </div>
                         <div>
