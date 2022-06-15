@@ -1,19 +1,34 @@
 import React from 'react'
+import flv from 'flv.js';
 import { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { fetchStream } from '../../actions';
-import flv from 'flv.js';
 
 function StreamShow(props) {
 
     const videoRef = React.createRef();
 
+    const buildPlayer = () => {
+        const player = flv.createPlayer({
+            type: 'flv',
+            url: `http://localhost:8000/live/${props.match.params.id}`
+        });
+
+        if (props.stream || player) {
+            return;
+        }
+        player.attachMediaElement(videoRef.current);
+        player.load();
+    }
 
     useEffect(() => {
-        props.fetchStream(props.match.params.id);
+        const { id } = props.match.params;
+        props.fetchStream(id);
+        buildPlayer();
     }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-        , [])
+        , [buildPlayer()])
+
+
 
     return (
         (props.stream) ? (
