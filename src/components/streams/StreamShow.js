@@ -1,52 +1,66 @@
-import React from 'react'
+import React from 'react';
 import flv from 'flv.js';
-import { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { fetchStream } from '../../actions';
 
-function StreamShow(props) {
+class StreamShow extends React.Component {
+    constructor(props) {
+        super(props);
 
-    const videoRef = React.createRef();
+        this.videoRef = React.createRef();
+    }
 
-    const buildPlayer = () => {
-        const player = flv.createPlayer({
-            type: 'flv',
-            url: `http://localhost:8000/live/${props.match.params.id}`
-        });
+    componentDidMount() {
+        const { id } = this.props.match.params;
 
-        if (props.stream || player) {
+        this.props.fetchStream(id);
+        this.buildPlayer();
+    }
+
+    componentDidUpdate() {
+        this.buildPlayer();
+    }
+
+    componentWillUnmount() {
+        this.player.destroy();
+    }
+
+    buildPlayer() {
+        if (this.player || !this.props.stream) {
             return;
         }
-        player.attachMediaElement(videoRef.current);
-        player.load();
+
+        const { id } = this.props.match.params;
+        this.player = flv.createPlayer({
+            type: 'flv',
+            url: `http://localhost:8000/live/${id}.flv`
+        });
+        this.player.attachMediaElement(this.videoRef.current);
+        this.player.load();
     }
 
-    useEffect(() => {
-        const { id } = props.match.params;
-        props.fetchStream(id);
-        buildPlayer();
-    }
-        , [buildPlayer()])
+    render() {
+        if (!this.props.stream) {
+            return <div>Loading...</div>;
+        }
 
+        const { title, description } = this.props.stream;
 
-
-    return (
-        (props.stream) ? (
-            <div className="flex flex-col max-w-2xl mx-[10vw] my-5">
-                <video ref={videoRef} style={{ width: '100%' }} controls />
-                <h1 className='text-2xl'> {props.stream.title} </h1>
-                <p> {props.stream.description} </p>
+        return (
+            <div>
+                <video ref={this.videoRef} style={{ width: '100%' }} controls />
+                <h1>{title}</h1>
+                <h5>{description}</h5>
             </div>
-        ) : (
-            <div>Loading...</div>
-        )
-    )
+        );
+    }
 }
 
 const mapStateToProps = (state, ownProps) => {
-    return {
-        stream: state.streams[ownProps.match.params.id]
-    }
-}
-export default connect(mapStateToProps, { fetchStream })(StreamShow);
+    return { stream: state.streams[ownProps.match.params.id] };
+};
 
+export default connect(
+    mapStateToProps,
+    { fetchStream }
+)(StreamShow);
