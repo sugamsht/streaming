@@ -1,0 +1,43 @@
+{
+  "streams": [
+    {
+      "title": "My first Stream",
+      "description": "Finally getting started",
+      "id": 1
+    },
+    {
+      "title": "My Second Stream",
+      "description": "Testing second stream",
+      "id": 2
+    },
+    {
+      "title": "Third Test",
+      "description": "Delete This",
+      "id": 3
+    },
+    {
+      "description": "This has userId",
+      "title": "This is my Stream",
+      "userId": "116376213360773748157",
+      "id": 4
+    },
+    {
+      "title": "Programmatic Navigation",
+      "description": "Should load home page",
+      "userId": "116376213360773748157",
+      "id": 5
+    },
+    {
+      "title": "Change the title also",
+      "description": "changed description",
+      "userId": "116376213360773748157",
+      "id": 7
+    },
+    {
+      "title": "This stream created by other me ",
+      "description": "Lets go play Genshin Impact",
+      "userId": "110501196332405923374",
+      "id": 8
+    }
+  ]
+}
