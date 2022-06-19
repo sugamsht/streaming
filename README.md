@@ -1,5 +1,5 @@
 # STREAMING
-React Redux Application for Streaming Vidoes Live.
+React Redux Application for Streaming Live Videos.
 
 # Getting Started with React App
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
